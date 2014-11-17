@@ -379,18 +379,9 @@ function! s:xml_encode(str)
   let str = substitute(str,'<','\&lt;','g')
   let str = substitute(str,'>','\&gt;','g')
   let str = substitute(str,'"','\&quot;','g')
-  let str = substitute(str,'á','\&aacute;','g')
-  let str = substitute(str,'Á','\&Aacute;','g')
-  let str = substitute(str,'é','\&eacute;','g')
-  let str = substitute(str,'É','\&Eacute;','g')
-  let str = substitute(str,'í','\&iacute;','g')
-  let str = substitute(str,'Í','\&Iacute;','g')
-  let str = substitute(str,'ó','\&oacute;','g')
-  let str = substitute(str,'Ó','\&Oacute;','g')
-  let str = substitute(str,'ú','\&uacute;','g')
-  let str = substitute(str,'Ú','\&Uacute;','g')
-  let str = substitute(str,'ñ','\&ntilde;','g')
-  let str = substitute(str,'Ñ','\&Ntilde;','g')
+  for key in keys(g:unimpaired_html_entities)
+    let str = substitute(str, nr2char(g:unimpaired_html_entities[key]),'\&'.key.';','g')
+  endfor
   return str
 endfunction
 
